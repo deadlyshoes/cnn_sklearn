@@ -1,3 +1,14 @@
+import keras
+from keras.models import Sequential
+from keras.layers import Conv2D, AveragePooling2D, MaxPooling2D, Dense, Flatten, Dropout
+from tensorflow.keras.optimizers import Adam, SGD
+from keras.datasets import mnist
+from keras.utils import np_utils
+
+from sklearn.metrics import accuracy_score
+
+import numpy as np
+
 class Keras_CNN_estimator():
     def __init__(self, kernel_size_1=0.1, kernel_size_2=0.1, activation_1=0, activation_2=0, 
                 pooling_1=0, pooling_2=0, n_kernels_1=0.001, n_kernels_2=0.001, neurons_1=0.01, neurons_2=0.01, 
