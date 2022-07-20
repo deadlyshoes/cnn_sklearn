@@ -1,73 +1,7 @@
 class Keras_CNN_estimator():
-    def __init__(self, kernel_size_1=3, kernel_size_2=3, activation_1="relu", activation_2="relu", 
-                pooling_1="max-pooling", pooling_2="max-pooling", n_kernels_1=150, n_kernels_2=75, neurons_1=50, neurons_2=50, 
-                activation_full_1="sigmoid", activation_full_2="sigmoid", learning_rate=0.1, dropout_1=0.1, dropout_2=0.3):
-        lbs = [0.0 for _ in range(15)]
-        ups = [1.0 for _ in range(15)]
-
-        # kernel size 1
-        lbs[0] = 0.1
-        ups[0] = 0.4
-
-        # kernel size 2
-        lbs[1] = 0.1
-        ups[1] = 0.4
-
-        # activation 1
-        lbs[2] = 0
-        ups[2] = 0.2
-
-        # activation 2
-        lbs[3] = 0
-        ups[3] = 0.2
-
-        # kind pooling 1
-        lbs[4] = 0
-        ups[4] = 0.1
-
-        # kind pooling 2
-        lbs[5] = 0
-        ups[5] = 0.1
-
-        # n kernels 1
-        lbs[6] = 0.001
-        ups[6] = 0.1       
-
-        # n kernels 2
-        lbs[7] = 0.001
-        ups[7] = 0.1
-
-        # neurons 1
-        lbs[8] = 0.01
-        ups[8] = 0.8
-
-        # neurons 2
-        lbs[9] = 0.01
-        ups[9] = 0.8
-
-        # activation full 1
-        lbs[10] = 0
-        ups[10] = 0.2
-
-        # activation full 2
-        lbs[11] = 0
-        ups[11] = 0.2
-
-        # learning rate
-        lbs[12] = 0.001
-        ups[12] = 1
-
-        # dropout rate 1
-        lbs[13] = 0.1
-        ups[13] = 0.9
-
-        # dropout rate 2
-        lbs[14] = 0.1
-        ups[14] = 0.9
-
-        self.lowerBounds = lbs
-        self.upperBounds = ups
-
+    def __init__(self, kernel_size_1=0.1, kernel_size_2=0.1, activation_1=0, activation_2=0, 
+                pooling_1=0, pooling_2=0, n_kernels_1=0.001, n_kernels_2=0.001, neurons_1=0.01, neurons_2=0.01, 
+                activation_full_1=0, activation_full_2=0, learning_rate=0.1, dropout_1=0.1, dropout_2=0.3):
         self.activations = ['relu', 'sigmoid', 'tanh']
         self.poolings = ['max-pooling', 'average-pooling']
         self.optimizers = ['adam', 'sgd']
