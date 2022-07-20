@@ -69,23 +69,23 @@ class Keras_CNN_estimator():
         return y_pred
 
     def build_cnn(self):
-        self.activations = ['relu', 'sigmoid', 'tanh']
-        self.poolings = ['max-pooling', 'average-pooling']
-        self.optimizers = ['adam', 'sgd']
-        self.initializers = ['random_uniform', 'normal']
+        activations = ['relu', 'sigmoid', 'tanh']
+        poolings = ['max-pooling', 'average-pooling']
+        optimizers = ['adam', 'sgd']
+        initializers = ['random_uniform', 'normal']
 
         kernel_size_1 = int(round(self.kernel_size_1 * 10)) * 2 + 1
         kernel_size_2 = int(round(self.kernel_size_2 * 10)) * 2 + 1
-        activation_1 = self.activations[int(round(self.activation_1 * 10))]
-        activation_2 = self.activations[int(round(self.activation_2 * 10))]
-        pooling_1 = self.poolings[int(round(self.pooling_1 * 10))]
-        pooling_2 = self.poolings[int(round(self.pooling_2 * 10))]
+        activation_1 = activations[int(round(self.activation_1 * 10))]
+        activation_2 = activations[int(round(self.activation_2 * 10))]
+        pooling_1 = poolings[int(round(self.pooling_1 * 10))]
+        pooling_2 = poolings[int(round(self.pooling_2 * 10))]
         n_kernels_1 = int(self.n_kernels_1 * 1000)
         n_kernels_2 = int(self.n_kernels_2 * 1000)
         neurons_1 = int(self.neurons_1 * 1000)
         neurons_2 = int(self.neurons_2 * 1000)
-        activation_full_1 = self.activations[int(self.activation_full_1 * 10)]
-        activation_full_2 = self.activations[int(self.activation_full_2 * 10)]
+        activation_full_1 = activations[int(self.activation_full_1 * 10)]
+        activation_full_2 = activations[int(self.activation_full_2 * 10)]
         learning_rate = self.learning_rate
         dropout_1 = self.dropout_1
         dropout_2 = self.dropout_2
