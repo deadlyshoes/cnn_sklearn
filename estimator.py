@@ -50,7 +50,7 @@ class Keras_CNN_estimator():
             "activation_full_2": self.activation_full_2,
             "dropout_1": self.dropout_1,
             "dropout_2": self.dropout_2,
-            "learning rate": self.learning_rate,
+            "learning_rate": self.learning_rate,
             "n_kernels_1": self.n_kernels_1,
             "n_kernels_2": self.n_kernels_2
         }
