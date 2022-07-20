@@ -10,6 +10,8 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 
 class Keras_CNN_estimator():
+    model = None
+
     def __init__(self, kernel_size_1=0.1, kernel_size_2=0.1, activation_1=0, activation_2=0, 
                 pooling_1=0, pooling_2=0, n_kernels_1=0.001, n_kernels_2=0.001, neurons_1=0.01, neurons_2=0.01, 
                 activation_full_1=0, activation_full_2=0, learning_rate=0.1, dropout_1=0.1, dropout_2=0.3):
@@ -106,8 +108,6 @@ class Keras_CNN_estimator():
         model.add(Dropout(dropout_1))
         model.add(Dense(neurons_2, activation=activation_full_2))
         model.add(Dropout(dropout_2))
-
-        self.model = model
 
 
     
