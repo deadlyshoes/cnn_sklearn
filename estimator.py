@@ -62,12 +62,12 @@ class Keras_CNN_estimator():
         return self
 
     def fit(self, X, y):
-        history = model.fit(X, y, epochs=30, batch_size=200, verbose=1)
+        history = self.model.fit(X, y, epochs=30, batch_size=200, verbose=1)
 
         return self
 
     def predict(self, X):
-        y_pred = model.predict(X)
+        y_pred = self.model.predict(X)
         return y_pred
 
     def build_cnn(self):
@@ -92,22 +92,22 @@ class Keras_CNN_estimator():
         dropout_1 = self.dropout_1
         dropout_2 = self.dropout_2
 
-        model = Sequential()
-        model.add(Conv2D(n_kernels_1, kernel_size=kernel_size_1, activation=activation_1))
+        self.model = Sequential()
+        self.model.add(Conv2D(n_kernels_1, kernel_size=kernel_size_1, activation=activation_1))
         if pooling_1 == 'max-pooling':
-            model.add(MaxPooling2D())
+            self.model.add(MaxPooling2D())
         else:
-            model.add(AveragePooling2D())
-        model.add(Conv2D(n_kernels_2, kernel_size=kernel_size_2, activation=activation_2))
+            self.model.add(AveragePooling2D())
+        self.model.add(Conv2D(n_kernels_2, kernel_size=kernel_size_2, activation=activation_2))
         if pooling_2 == 'max-pooling':
-            model.add(MaxPooling2D())
+            self.model.add(MaxPooling2D())
         else:
-            model.add(AveragePooling2D())
-        model.add(Flatten())
-        model.add(Dense(neurons_1, activation=activation_full_1))
-        model.add(Dropout(dropout_1))
-        model.add(Dense(neurons_2, activation=activation_full_2))
-        model.add(Dropout(dropout_2))
+            self.model.add(AveragePooling2D())
+        self.model.add(Flatten())
+        self.model.add(Dense(neurons_1, activation=activation_full_1))
+        self.model.add(Dropout(dropout_1))
+        self.model.add(Dense(neurons_2, activation=activation_full_2))
+        self.model.add(Dropout(dropout_2))
 
 
     
