@@ -57,11 +57,10 @@ class Keras_CNN_estimator():
         for parameter, value in parameters.items():
             setattr(self, parameter, value)
 
-        self.build_cnn()
-
         return self
 
     def fit(self, X, y):
+        self.build_cnn()
         history = self.model.fit(X, y, epochs=30, batch_size=200, verbose=1)
 
         return self
