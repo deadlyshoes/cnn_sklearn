@@ -64,12 +64,12 @@ class Keras_CNN_estimator():
         return self
 
     def fit(self, X, y):
-        history = self.model.fit(self.X_train, self.y_train, epochs=30, batch_size=200, verbose=1)
+        history = self.model.fit(X, y, epochs=30, batch_size=200, verbose=1)
 
         return self
 
     def predict(self, X):
-        y_pred = model.predict(self.X)
+        y_pred = self.model.predict(X)
         return y_pred
 
     def build_cnn(self):
@@ -90,7 +90,7 @@ class Keras_CNN_estimator():
         dropout_2 = self.dropout_2
 
         model = Sequential()
-        model.add(Conv2D(n_kernels_1, kernel_size=kernel_size_1, activation=activation_1, input_shape=self.input_dim))
+        model.add(Conv2D(n_kernels_1, kernel_size=kernel_size_1, activation=activation_1))
         if pooling_1 == 'max-pooling':
             model.add(MaxPooling2D())
         else:
