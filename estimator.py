@@ -10,12 +10,9 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 
 class Keras_CNN_estimator():
-    model = None
-
     def __init__(self, kernel_size_1=0.1, kernel_size_2=0.1, activation_1=0, activation_2=0, 
                 pooling_1=0, pooling_2=0, n_kernels_1=0.001, n_kernels_2=0.001, neurons_1=0.01, neurons_2=0.01, 
                 activation_full_1=0, activation_full_2=0, learning_rate=0.1, dropout_1=0.1, dropout_2=0.3):
-
         self.kernel_size_1 = kernel_size_1
         self.kernel_size_2 = kernel_size_2
         self.activation_1 = activation_1
@@ -31,8 +28,6 @@ class Keras_CNN_estimator():
         self.learning_rate = learning_rate
         self.n_kernels_1 = n_kernels_1
         self.n_kernels_2 = n_kernels_2
-
-        self.build_cnn()
 
     def get_params(self, deep=True):
         return {
@@ -53,7 +48,7 @@ class Keras_CNN_estimator():
             "n_kernels_2": self.n_kernels_2
         }
 
-    def set_params(self, parameters):
+    def set_params(self, **parameters):
         for parameter, value in parameters.items():
             setattr(self, parameter, value)
 
@@ -61,7 +56,7 @@ class Keras_CNN_estimator():
 
     def fit(self, X, y):
         self.build_cnn()
-        history = self.model.fit(X, y, epochs=30, batch_size=200, verbose=1)
+        self.model.fit(X, y, epochs=30, batch_size=200, verbose=1)
 
         return self
 
@@ -72,8 +67,6 @@ class Keras_CNN_estimator():
     def build_cnn(self):
         activations = ['relu', 'sigmoid', 'tanh']
         poolings = ['max-pooling', 'average-pooling']
-        optimizers = ['adam', 'sgd']
-        initializers = ['random_uniform', 'normal']
 
         kernel_size_1 = int(round(self.kernel_size_1 * 10)) * 2 + 1
         kernel_size_2 = int(round(self.kernel_size_2 * 10)) * 2 + 1
@@ -91,22 +84,28 @@ class Keras_CNN_estimator():
         dropout_1 = self.dropout_1
         dropout_2 = self.dropout_2
 
-        self.model = Sequential()
-        self.model.add(Conv2D(n_kernels_1, kernel_size=kernel_size_1, activation=activation_1))
+        model = Sequential()
+        model.add(Conv2D(n_kernels_1, kernel_size=kernel_size_1, activation=activation_1))
         if pooling_1 == 'max-pooling':
-            self.model.add(MaxPooling2D())
+            model.add(MaxPooling2D())
         else:
-            self.model.add(AveragePooling2D())
-        self.model.add(Conv2D(n_kernels_2, kernel_size=kernel_size_2, activation=activation_2))
+            model.add(AveragePooling2D())
+        model.add(Conv2D(n_kernels_2, kernel_size=kernel_size_2, activation=activation_2))
         if pooling_2 == 'max-pooling':
-            self.model.add(MaxPooling2D())
+            model.add(MaxPooling2D())
         else:
-            self.model.add(AveragePooling2D())
-        self.model.add(Flatten())
-        self.model.add(Dense(neurons_1, activation=activation_full_1))
-        self.model.add(Dropout(dropout_1))
-        self.model.add(Dense(neurons_2, activation=activation_full_2))
-        self.model.add(Dropout(dropout_2))
+            model.add(AveragePooling2D())
+        model.add(Flatten())
+        model.add(Dense(neurons_1, activation=activation_full_1))
+        model.add(Dropout(dropout_1))
+        model.add(Dense(neurons_2, activation=activation_full_2))
+        model.add(Dropout(dropout_2))
+        model.add(Dense(10, activation='softmax')) # hardcode 10 for MNIST
+
+        optimizer = SGD(learning_rate=learning_rate)
+        model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
+
+        self.model = model
 
 
     
