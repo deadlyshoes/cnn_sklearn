@@ -5,6 +5,8 @@ from tensorflow.keras.optimizers import Adam, SGD
 from keras.datasets import mnist
 from keras.utils import np_utils
 
+from tensorflow.keras import utils
+
 from sklearn.metrics import accuracy_score
 
 import numpy as np
@@ -56,13 +58,16 @@ class Keras_CNN_estimator():
 
     def fit(self, X, y):
         self.build_cnn()
-        self.model.fit(X, y, epochs=30, batch_size=200, verbose=1)
+
+        y_categorical = utils.to_categorical(y)
+        self.model.fit(X, y_categorical, epochs=30, batch_size=200, verbose=1)
 
         return self
 
     def predict(self, X):
         y_pred = self.model.predict(X)
-        return y_pred
+
+        return np.argmax(y_pred, axis=1)
 
     def build_cnn(self):
         activations = ['relu', 'sigmoid', 'tanh']

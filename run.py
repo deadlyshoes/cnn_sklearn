@@ -18,14 +18,8 @@ from estimator import Keras_CNN_estimator
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
 X_train = X_train.reshape(60000, 28, 28, 1)
-X_test = X_test.reshape(10000, 28, 28, 1)
 X_train = X_train.astype('float32')
-X_test = X_test.astype('float32')
 X_train /= 255
-X_test /= 255
-
-y_train = utils.to_categorical(y_train)
-y_test = utils.to_categorical(y_test)
 
 neurons_values = list(range(10, 800))
 for i in range(len(neurons_values)):
@@ -55,7 +49,7 @@ rf_params = {
     "n_kernels_1": n_kernels_values,
     "n_kernels_2": n_kernels_values
 }
-n_iter_search=20
+n_iter_search=100
 clf = Keras_CNN_estimator()
 Random = RandomizedSearchCV(clf, param_distributions=rf_params,n_iter=n_iter_search,cv=3,scoring='accuracy')
 Random.fit(X_train, y_train)
